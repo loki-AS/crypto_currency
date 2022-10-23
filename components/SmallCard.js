@@ -4,6 +4,7 @@ import { CryptoState } from "../contexts/CryptoContext";
 import axios from 'axios'
 import AliceCarousel from 'react-alice-carousel';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -12,6 +13,7 @@ export function numberWithCommas(x) {
 const SmallCard = () => {
   const [trending, setTrending] = useState([])
   const { currency, symbol } = CryptoState()
+  const router = useRouter()
 
   const fetchTrendingCoins = async() => {
     const { data } = await axios.get(TrendingCoins(currency))
@@ -28,7 +30,7 @@ const SmallCard = () => {
     let profit = coin?.price_change_percentage_24h >= 0;
 
     return(
-      <div key={coin.name}>
+      <div key={coin.name} onClick={() => router.push(`/coins/${coin.id}`)}>
       <div className='relative h-20 w-20 flex justify-center text-center'>
       <Image
       layout='fill'
