@@ -76,6 +76,7 @@ const CoinsTable = () => {
                 <TableRow
                   key={row.name}
                   className="cursor-pointer hover:bg-gray-300 dark:hover:bg-[#040404]"
+                  onClick={() => router.push(`/coins/${row.id}`)}
                 >
                   <TableCell
                     component="th"
