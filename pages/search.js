@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { GoSearch } from 'react-icons/go'
@@ -12,9 +12,8 @@ import { useRouter } from 'next/router'
 
 const search = () => {
 
-  const [loading, setLoading] = useState(false)
   const [coins, setCoins] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const router = useRouter()
 
