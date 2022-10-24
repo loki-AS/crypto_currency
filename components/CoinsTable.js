@@ -15,6 +15,7 @@ import Pagination from '@mui/material/Pagination';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { GoSearch } from 'react-icons/go';
 
 
 export function numberWithCommas(x) {
@@ -25,6 +26,7 @@ const CoinsTable = () => {
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState("");
 
     const { currency, symbol } = CryptoState();
 
@@ -42,9 +44,28 @@ const CoinsTable = () => {
         fetchCoins();
       }, [currency]);
 
+      const handleSearch = () => {
+        return coins.filter(
+          (coin) =>
+            coin.name.toLowerCase().includes(search) ||
+            coin.symbol.toLowerCase().includes(search)
+        );
+      };
+
   return (
     <>
     <Container style={{ textAlign: "center" }}>
+    <div className="relative flex w-full flex-wrap items-stretch mb-3">
+  <input 
+  type="text" 
+  placeholder="Search For a Crypto Currency.." 
+  className="px-3 py-3 placeholder-slate-300 font-poppins dark:placeholder-gray-500 text-slate-600 relative bg-transparent rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10"
+  onChange={(e) => setSearch(e.target.value)}
+  />
+  <span className="z-10 h-full leading-snug font-normal absolute text-center text-slate-300 dark:text-gray-500 bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+    <GoSearch className="cursor-pointer" />
+  </span>
+</div>
     <TableContainer component={Paper}>
     {loading ? (
       <LinearProgress style={{ backgroundColor: "gold" }} />
@@ -69,7 +90,7 @@ const CoinsTable = () => {
         </TableHead>
 
         <TableBody className="dark:bg-[#0d1116] bg-gray-100 ">
-          {coins?.slice((page - 1) * 10, (page - 1) * 10 + 10)
+          {handleSearch().slice((page - 1) * 10, (page - 1) * 10 + 10)
           .map((row) => {
               const profit = row.price_change_percentage_24h > 0;
               return (

@@ -16,7 +16,7 @@ const Footer = () => {
         <h1 className='text-gray-500 font-poppins'>Home</h1>
       </div>
 
-      <div className='cursor-pointer transition transform duration-200 ease-out hover:scale-105'>
+      {/* <div className='cursor-pointer transition transform duration-200 ease-out hover:scale-105'>
       <div className='flex text-center justify-center'>
         <Link href='/search'>
       <BsSearch size={30} />   
@@ -24,7 +24,7 @@ const Footer = () => {
              
       </div>
       <h1 className='text-gray-500 font-poppins'>Search</h1>
-      </div>
+      </div> */}
 
       <div className='cursor-pointer transition transform duration-200 ease-out hover:scale-105'>
       <div className='flex text-center justify-center'>
